@@ -4,24 +4,32 @@
 #
 # Requirements
 # ------------
+# Everything is run as root user, so…
+#
 # /root/.my.cnf:
 # --
 # [mysqldump]
 # user=mysql-backup-user
 # password=mysql-backup-user-password
 # --
-# Important: chmod 0600 /root/.my.cnf
+# Important:
+# Restrict access to mysql-config-file to root user (r+w)
+# chmod 0600 /root/.my.cnf
 #
-# Check Option --default-character-set
+# Make script executable
+# sudo chmod +x backup.sh
 #
-# Tip: create a seperate mysql backup user
-# CREATE USER 'backup'@'localhost' IDENTIFIED BY '[password]';
-# GRANT SELECT, LOCK TABLES ON *.* TO 'backup'@'localhost';
-# FLUSH PRIVILEGES;
+# Tip:
+# create a separate mysql backup user with only read-access to db
+# > CREATE USER 'backup'@'localhost' IDENTIFIED BY '[password]';
+# > GRANT SELECT, LOCK TABLES ON *.* TO 'backup'@'localhost';
+# > FLUSH PRIVILEGES;
 #
 # Cronjob:
 # run everyy day at 1am and write output to /var/log/backup.log
 # 0 1 * * * /var/www/…/backup.sh >> /var/log/backup.log
+#
+# Check mysqldump-option --default-character-set for your installation
 
 ### Write log to temporary file  ###
 # exec &> /tmp/backup.log
