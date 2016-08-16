@@ -26,7 +26,7 @@
 ### Write log to temporary file  ###
 # exec &> /tmp/backup.log
 
-JOBNAME="[projectname] ";
+JOBNAME="[projectname]";
 STORAGEDIR="/var/www/[…]/backup";
 DATE=`date +"%Y-%m-%d"`;
 TIME=`date +"%H-%M"`;
