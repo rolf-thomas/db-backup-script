@@ -18,6 +18,10 @@
 # CREATE USER 'backup'@'localhost' IDENTIFIED BY '[password]';
 # GRANT SELECT, LOCK TABLES ON *.* TO 'backup'@'localhost';
 # FLUSH PRIVILEGES;
+#
+# Cronjob:
+# run everyy day at 1am and write output to /var/log/backup.log
+# 0 1 * * * /var/www/…/backup.sh >> /var/log/backup.log
 
 ### Write log to temporary file  ###
 # exec &> /tmp/backup.log
