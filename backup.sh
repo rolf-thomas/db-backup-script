@@ -34,15 +34,20 @@
 ### Write log to temporary file  ###
 # exec &> /tmp/backup.log
 
+# Config
 JOBNAME="[projectname]";
 STORAGEDIR="/var/www/[…]/backup";
 DATE=`date +"%Y-%m-%d"`;
-TIME=`date +"%H-%M"`;
+TIME=`date +"%H-%M-%S"`;
 DBNAME="[dbname]";
+
+# Prepare backup command
 BACKUPCOMMAND="mysqldump --default-character-set=utf8mb4 ${DBNAME} | gzip > ${STORAGEDIR}/backup-db-${DBNAME}-${DATE}--${TIME}.gz";
 
-echo "\n";
-echo "$DATE $TIME - start db backup '$JOBNAME'";
-echo $BACKUPCOMMAND;
+# Execute
+echo "$DATE $TIME start db backup '$JOBNAME'";
+echo "$DATE $TIME $BACKUPCOMMAND";
 eval $BACKUPCOMMAND;
-echo "$DATE $TIME - end db backup '$JOBNAME'";
+DATE=`date +"%Y-%m-%d"`;
+TIME=`date +"%H-%M-%S"`;
+echo "$DATE $TIME end db backup '$JOBNAME'";
